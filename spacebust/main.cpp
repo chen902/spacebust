@@ -5,6 +5,7 @@
 #include "ShaderProgram.h"
 #include "GameObject.h"
 #include "loader.h"
+#include "RawModel.h"
 
 void render(const GameObject& object, const ShaderProgram& shader, GLFWwindow* window);
 void update();
@@ -26,19 +27,20 @@ int main(void) {
 	Loader loader;
 
 	const float g_vertex_buffer_data[] = {
-		-1.0f, -1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
-		0.0f,  1.0f, 0.0f,
+		-0.1f, -0.3f, 0.0f, // LEFT
+		0.1f, -0.3f, 0.0f, // RIGHT
+		0.0f,  0.4f, 0.0f, // TOP
 	};
 
-	GameObject s1 = loader.loadToVAO(g_vertex_buffer_data, sizeof(g_vertex_buffer_data));
+	RawModel& m1 = loader.loadToVAO(g_vertex_buffer_data, sizeof(g_vertex_buffer_data));
+	GameObject* go1 = new GameObject(m1, glm::vec2(0.0), 0.5);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		handleInput();
 		update();
-		render(s1, shader, window);
+		render(*go1, shader, window);
 	}
 
 	
@@ -53,7 +55,7 @@ void render(const GameObject& object, const ShaderProgram& shader, GLFWwindow* w
 
 	shader.startShader();
 
-	glBindVertexArray(object.getID());
+	glBindVertexArray(object.getModel().getID());
 
 	glEnableVertexAttribArray(0);
 	
@@ -66,7 +68,7 @@ void render(const GameObject& object, const ShaderProgram& shader, GLFWwindow* w
 		(void*)0
 	);
 	
-	glDrawArrays(GL_TRIANGLES, 0, object.getVerticeCount() * sizeof(float) * 3);
+	glDrawArrays(GL_TRIANGLES, 0, object.getModel().getVerticeCount() * sizeof(float) * 3);
 	
 	glDisableVertexAttribArray(0);
 

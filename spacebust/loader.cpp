@@ -39,7 +39,7 @@ void Loader::unbindVAO()
 	glBindVertexArray(0);
 }
 
-GameObject& Loader::loadToVAO(const float* indexBuffer, size_t indexBufferSize)
+RawModel& Loader::loadToVAO(const float* indexBuffer, size_t indexBufferSize)
 {
 	// create a new VAO in GPU
 	unsigned int vaoID = this->createVAO();
@@ -51,7 +51,7 @@ GameObject& Loader::loadToVAO(const float* indexBuffer, size_t indexBufferSize)
 	this->unbindVAO();
 
 	// num of vertices = indexBufferSize(bytes) / sizeof float / 3 floats per vertex
-	return *(new GameObject(vaoID, indexBufferSize / sizeof(float) / 3.0));
+	return *(new RawModel(vaoID, indexBufferSize / sizeof(float) / 3.0));
 }
 
 // Removes all VAOs from GPU

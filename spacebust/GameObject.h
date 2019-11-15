@@ -1,14 +1,25 @@
 #pragma once
+#include <glm/glm.hpp>
+#include "RawModel.h"
+
 class GameObject
 {
 public:
-	GameObject(unsigned int id, size_t verticeCount) : vaoID(id), verticeCount(verticeCount) {};
+	GameObject(RawModel& model, const glm::vec2 pos, const float scale) : model(model), position(pos), scale(scale) {};
 	~GameObject() {};
-	unsigned int getID() const { return this->vaoID; };
-	unsigned int getVerticeCount() const { return this->verticeCount; };
+	float getPosX() const { return this->position.x; };
+	float getPosY() const { return this->position.y; };
+	float getScale() const { return this->scale; };
+
+	RawModel& getModel() const { return this->model; };
+
+	static glm::mat3 getModelMatrix() {
+
+	}
 
 private:
-	unsigned int vaoID;
-	size_t verticeCount;
+	RawModel& model;
+	glm::vec2 position;
+	float scale;
 };
 
