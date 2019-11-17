@@ -348,3 +348,5 @@ MigrationBackup/
 
 #OpenGL stuff
 OpenGL/*
+
+*.i

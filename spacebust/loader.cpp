@@ -68,8 +68,8 @@ RawModel& Loader::loadToVAO(const float* indexBuffer, size_t indexBufferSize)
 	// unbind VAO
 	this->unbindVAO();
 
-	// num of vertices = indexBufferSize(bytes) / sizeof float / 3 floats per vertex
-	return *(new RawModel(vaoID, indexBufferSize / sizeof(float) / 3.0));
+	// num of vertices = indexBufferSize(bytes) / sizeof float / 2 floats per vertex
+	return *(new RawModel(vaoID, indexBufferSize / sizeof(float) / 2.0));
 }
 
 // Removes all VAOs from GPU
