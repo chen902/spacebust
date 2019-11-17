@@ -17,7 +17,7 @@ private:
 	std::vector<unsigned int> vbos;
 
 	unsigned int createVAO();
-	void storeDataInArrayBuffer(const float* buffer, size_t size);
+	void storeDataInArrayBuffer(unsigned int index, const float* buffer, size_t size);
 	void unbindVAO();
 };
 
