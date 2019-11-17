@@ -1,12 +1,9 @@
 #version 330 core
+out vec4 color;
 
-// Ouput data
-out vec3 color;
+uniform vec3 spriteColor;
 
 void main()
 {
-
-	// Output color = red 
-	color = vec3(1, 0, 0);
-
+	color = vec4(vec3(0.0,1.0,0.0), 1.0);
 }
