@@ -24,18 +24,18 @@ void GameWorld::init()
 	std::cout << "GameWorld init!" << std::endl;
 
 	const float g_vertex_buffer_data[] = {
-	0.0f, 0.5f, // LEFT
-	0.5f, 1.0f, // RIGHT
-	1.0f,  0.0f // TOP
+	0.8f, 1.0f, // RIGHT
+	0.2f, 1.0f, // LEFT
+	0.5f,  0.0f // TOP
 	};
 
 	RawModel& m1 = this->loader->loadToVAO(g_vertex_buffer_data, sizeof(g_vertex_buffer_data));
-	this->spaceship = new GameObject(m1, glm::vec2(200.0, 200.0), 100.0f);
+	//this->spaceship = new GameObject(m1, glm::vec2(200.0, 200.0), 100.0f, 0.0f, 10.0f);
+	this->spaceship = new GameObject(m1, glm::vec2(0.0f, 0.0f), 30.0f, 0.0f, 10.0f);
 }
 
 void GameWorld::start()
 {
-	
 	this->gameLoop();
 	this->display.destroyDisplay();
 	this->loader->cleanUp();
@@ -54,6 +54,7 @@ void GameWorld::renderAll()
 
 void GameWorld::updateAll()
 {
+	this->spaceship->update(0.01);
 }
 
 void GameWorld::handleUserInput()
@@ -62,17 +63,17 @@ void GameWorld::handleUserInput()
 
 	GLFWwindow* window = this->display.getGLFWWindow();
 	if (glfwGetKey(window, GLFW_KEY_RIGHT)) {
-		this->spaceship->increaseXPos(1.0);
+		this->spaceship->increaseAngle(0.01);
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT)) {
-		this->spaceship->increaseXPos(-1.0);
+		this->spaceship->increaseAngle(-0.01);
 	}
-	if (glfwGetKey(window, GLFW_KEY_UP)) {
-		this->spaceship->increaseYPos(-1.0);
-	}
-	if (glfwGetKey(window, GLFW_KEY_DOWN)) {
-		this->spaceship->increaseYPos(1.0);
-	}
+	//if (glfwGetKey(window, GLFW_KEY_UP)) {
+	//	this->spaceship->increaseYPos(-1.0);
+	//}
+	//if (glfwGetKey(window, GLFW_KEY_DOWN)) {
+	//	this->spaceship->increaseYPos(1.0);
+	//}
 
 }
 

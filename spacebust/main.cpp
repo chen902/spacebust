@@ -1,3 +1,6 @@
+/*
+Dry-ache
+*/
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -7,11 +10,6 @@
 #include "loader.h"
 #include "RawModel.h"
 #include "GameWorld.h"
-
-void render(const GameObject& object, const ShaderProgram& shader, GLFWwindow* window);
-void update();
-void handleInput(GameObject& obj, GLFWwindow* window);
-
 
 int main(void) {
 	// handles window opening
