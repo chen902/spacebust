@@ -30,8 +30,8 @@ void GameWorld::init()
 	};
 
 	RawModel& m1 = this->loader->loadToVAO(g_vertex_buffer_data, sizeof(g_vertex_buffer_data));
-	//this->spaceship = new GameObject(m1, glm::vec2(200.0, 200.0), 100.0f, 0.0f, 10.0f);
-	this->spaceship = new GameObject(m1, glm::vec2(0.0f, 0.0f), 30.0f, 0.0f, 10.0f);
+	this->spaceship = new SpaceShip(m1, glm::vec2(400.0f, 300.0f));
+	this->objects.push_back(this->spaceship);
 }
 
 void GameWorld::start()
@@ -43,10 +43,10 @@ void GameWorld::start()
 
 void GameWorld::renderAll()
 {
-	//for (GameObject obj : this->objects) {
-	//	this->renderer->render(obj);
-	//}
-	this->renderer->render(*(this->spaceship));
+	for (GameObject* obj : this->objects) {
+		this->renderer->render(*obj);
+	}
+	//this->renderer->render(*(this->spaceship));
 	
 	glfwSwapBuffers(display.getGLFWWindow());
 
@@ -62,6 +62,14 @@ void GameWorld::handleUserInput()
 	glfwPollEvents();
 
 	GLFWwindow* window = this->display.getGLFWWindow();
+
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) {
+		this->spaceship->increaseSpeed(0.1f);
+	}
+	else {
+		this->spaceship->increaseSpeed(-0.1f);
+	}
+
 	if (glfwGetKey(window, GLFW_KEY_RIGHT)) {
 		this->spaceship->increaseAngle(0.01);
 	}

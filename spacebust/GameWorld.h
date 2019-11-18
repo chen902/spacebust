@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 
+#include "SpaceShip.h"
 #include "GameObject.h"
 #include "loader.h"
 #include "Renderer.h"
@@ -17,7 +18,7 @@ public:
 	void start();
 
 private:
-	std::vector<GameObject> objects;
+	std::vector<GameObject*> objects;
 	GameObject* spaceship;
 
 	void renderAll();

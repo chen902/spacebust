@@ -5,5 +5,5 @@ uniform vec3 spriteColor;
 
 void main()
 {
-	color = vec4(vec3(0.0,1.0,0.0), 1.0);
+	color = vec4(vec3(0.0,1.0,0.7), 1.0);
 }
